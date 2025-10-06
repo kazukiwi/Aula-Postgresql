@@ -24,3 +24,26 @@ elif menu == "Listar":
         st.table(alunos)
     else:
         st.info("Nenhum aluno encontrado")
+
+elif menu == "Atualizar":
+    st.subheader("Atualizar idade do aluno")
+    alunos = listar_aluno()
+    if alunos:
+        id_aluno = st.selectbox("Escolha o aluno", [aluno[0] for aluno in alunos])
+        nova_idade = st.number_input("Nova idade", min_value=15, step=1)
+        if st.button("Atualizar"):
+            atualizar_alunos(id_aluno, nova_idade)
+            st.success(f"Idade do aluno {id_aluno} atualizada com sucesso")
+        else:
+            st.info("Nenhum aluno disponível para atualizar")
+
+elif menu == "Deletar":
+    st.subheader("Deletar aluno")
+    alunos = listar_aluno()
+    if alunos:
+        id_aluno = st.selectbox("Escolha o aluno para deletar", [aluno[0] for aluno in alunos])
+        if st.button("Deletar"):
+            deletar_aluno(id_aluno)
+            st.success(f"O aluno do id {id_aluno} deletado com sucesso")
+        else:
+            st.info("Nenhum aluno disponivel para deletar")
